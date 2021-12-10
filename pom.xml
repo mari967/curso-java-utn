@@ -11,7 +11,7 @@
 	<groupId>com.mc</groupId>
 	<artifactId>questionados</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>questionados</name>
 	<description>Juego de preguntas Questionados</description>
 	<properties>
