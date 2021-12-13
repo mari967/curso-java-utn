@@ -1,29 +1,23 @@
 package com.mc.questionados.controller;
 
-import java.util.List;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mc.questionados.dto.CategoriaDto;
 import com.mc.questionados.entity.Categoria;
+import com.mc.questionados.response.GenericResponse;
+import com.mc.questionados.service.CategoriaService;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
-import com.mc.questionados.response.GenericResponse;
-import com.mc.questionados.service.CategoriaService; 
+import io.swagger.annotations.ApiOperation; 
 
 @RestController(value ="/categorias")
 @Api(tags = "Categorias")  //Swagger
@@ -76,7 +70,7 @@ public class CategoriaController {
 	
 	@ApiOperation(value = "Eliminar una categoría")//Swagger
 	@DeleteMapping
-	@RequestMapping("{categoriaId}")
+	@RequestMapping("/{categoriaId}")
 	public ResponseEntity<String> delete(@PathVariable("categoriaId") Long categoriaId) {
 		if(categoriaService.existById(categoriaId)) {
 			categoriaService.delete(categoriaId);
@@ -88,7 +82,23 @@ public class CategoriaController {
 	
 	@ApiOperation(value = "Actualizar un categoría")//Swagger
 	@PutMapping
-	public ResponseEntity<Categoria> update() {
-		return Arrays.asList("Ciencia", "Literatura", "Musica");
+	@RequestMapping("/{categoriaId}")
+	public ResponseEntity<GenericResponse> update(@PathVariable("categoriaId") long categoriaId, @RequestBody CategoriaDto dto) {
+		
+		GenericResponse respuesta = new GenericResponse();
+		
+		if(categoriaService.existById(categoriaId)) {
+			Categoria categoriaActualizado = categoriaService.update(dto);
+
+			respuesta.setId(categoriaActualizado.getCategoria_id());
+			respuesta.setIsOK(true);
+			respuesta.setMensaje("Categoria actualizada correctamente");
+			
+			return ResponseEntity.ok(respuesta);
+		}
+		respuesta.setId(categoriaId);
+		respuesta.setIsOK(false);
+		respuesta.setMensaje("La categoría no existe");
+		return ResponseEntity.badRequest().body(respuesta);
 	}
 }
