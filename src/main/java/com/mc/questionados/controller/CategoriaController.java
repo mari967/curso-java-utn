@@ -19,7 +19,7 @@ import com.mc.questionados.service.CategoriaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation; 
 
-@RestController(value ="/categorias")
+@RestController
 @Api(tags = "Categorias")  //Swagger
 
 @RequestMapping("/categorias")
