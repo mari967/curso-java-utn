@@ -21,7 +21,7 @@ public class Pregunta {
 	
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "categoria_pregunta_id", nullable = false)
+	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 	
 	
