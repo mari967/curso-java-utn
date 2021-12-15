@@ -1,5 +1,6 @@
 package com.mc.questionados.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,10 @@ public class PreguntaService {
 	public Boolean existById(Long id) {
 		Pregunta resultado = this.get(id);
 		return resultado != null;
+	}
+
+	public List<Pregunta> getPreguntasByCategoria(Long categoriaId) {
+		return preguntaRepo.findByCategoriaId(categoriaId);
 	}
 	
 	

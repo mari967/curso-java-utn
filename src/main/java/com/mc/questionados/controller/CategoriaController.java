@@ -1,5 +1,7 @@
 package com.mc.questionados.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mc.questionados.dto.CategoriaDto;
 import com.mc.questionados.entity.Categoria;
+import com.mc.questionados.entity.Pregunta;
 import com.mc.questionados.response.GenericResponse;
 import com.mc.questionados.service.CategoriaService;
+import com.mc.questionados.service.PreguntaService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation; 
@@ -27,6 +31,9 @@ public class CategoriaController {
 	
 	@Autowired
 	CategoriaService categoriaService;
+	
+	@Autowired
+	PreguntaService preguntaService;
 
 	@ApiOperation(value = "Obtener todas las categorias")//Swagger
 	@GetMapping
@@ -51,6 +58,22 @@ public class CategoriaController {
 		}
 	}
 
+	
+	@ApiOperation(value = "Obtener todas las preguntas de una categoría")//Swagger
+	@GetMapping("/{categoriaId}/preguntas")
+	public ResponseEntity<?> getPreguntasByIdCategoria(@PathVariable("categoriaId") Long categoriaId) {
+		
+		if(categoriaService.existById(categoriaId)) {
+			return ResponseEntity.ok(preguntaService.getPreguntasByCategoria(categoriaId));
+			
+		} else {
+			GenericResponse respuesta = new GenericResponse();
+			respuesta.setIsOK(false);
+			respuesta.setMensaje("No se encontró la categoría con el id " + categoriaId);
+			
+			return ResponseEntity.badRequest().body(respuesta);
+		}
+	}
 	
 	@ApiOperation(value = "Crear una categoría")//Swagger
 	@PostMapping
