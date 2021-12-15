@@ -85,7 +85,7 @@ public class CategoriaController {
 		GenericResponse respuesta = new GenericResponse();
 		
 		if(categoriaService.existById(categoriaId)) {
-			Categoria categoriaActualizado = categoriaService.update(dto);
+			Categoria categoriaActualizado = categoriaService.update(categoriaId, dto);
 
 			respuesta.setId(categoriaActualizado.getCategoria_id());
 			respuesta.setIsOK(true);

@@ -39,8 +39,8 @@ public class CategoriaService {
 		
 	} 
 	
-	public Categoria update(CategoriaDto dto) {
-		Optional<Categoria> categoria = categoriaRepo.findById(dto.getCategoria_id());
+	public Categoria update(Long categoriaId, CategoriaDto dto) {
+		Optional<Categoria> categoria = categoriaRepo.findById(categoriaId);
 		if(categoria.isPresent()) {
 			Categoria categoriaActualizacion = categoria.get();
 			categoriaActualizacion.setDescripcion(dto.getDescripcion().isEmpty() || dto.getDescripcion() == null ? categoriaActualizacion.getDescripcion() : dto.getDescripcion());
