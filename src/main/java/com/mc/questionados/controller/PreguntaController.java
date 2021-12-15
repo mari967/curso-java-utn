@@ -35,7 +35,7 @@ public class PreguntaController {
 	}
 	
 
-	@ApiOperation(value = "Obtener categoria por id")//Swagger
+	@ApiOperation(value = "Obtener pregunta por id")//Swagger
 	@GetMapping("/{preguntaId}")
 	public ResponseEntity<?> getById(@PathVariable("preguntaId") Long preguntaId) {
 		
@@ -56,12 +56,12 @@ public class PreguntaController {
 	@PostMapping
 	public ResponseEntity<GenericResponse> create(@RequestBody PreguntaDto dto) {
 		GenericResponse respuesta = new GenericResponse();
-		//Crear categoria
-		Pregunta categoriaNueva = preguntaService.create(dto);
+		//Crear pregunta
+		Pregunta preguntaNueva = preguntaService.create(dto);
 		//Envía detalles de la pregunta creada en la respuesta
 		respuesta.setIsOK(true);
 		respuesta.setMensaje("Pregunta creada con éxito");
-		respuesta.setId(categoriaNueva.getPregunta_id());
+		respuesta.setId(preguntaNueva.getPregunta_id());
 		
 		return ResponseEntity.ok(respuesta);
 	}
@@ -85,9 +85,9 @@ public class PreguntaController {
 		GenericResponse respuesta = new GenericResponse();
 		
 		if(preguntaService.existById(preguntaId)) {
-			Pregunta categoriaActualizado = preguntaService.update(dto);
+			Pregunta preguntaActualizada = preguntaService.update(preguntaId, dto);
 
-			respuesta.setId(categoriaActualizado.getPregunta_id());
+			respuesta.setId(preguntaActualizada.getPregunta_id());
 			respuesta.setIsOK(true);
 			respuesta.setMensaje("Pregunta actualizada correctamente");
 			

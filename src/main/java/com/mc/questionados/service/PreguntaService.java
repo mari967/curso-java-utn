@@ -13,6 +13,8 @@ import com.mc.questionados.repository.PreguntaRepo;
 public class PreguntaService {
 	@Autowired
 	PreguntaRepo preguntaRepo;	
+	@Autowired 
+	CategoriaService categoriaService;
 	
 	public Pregunta get(long id) {
 		Optional<Pregunta> preguntaResult = preguntaRepo.findById(id);
@@ -31,14 +33,15 @@ public class PreguntaService {
 	public Pregunta create(PreguntaDto dto) {
 		Pregunta preguntaNueva = new Pregunta();
 		preguntaNueva.setEnunciado(dto.getEnunciado());
+		preguntaNueva.setCategoria(categoriaService.get(dto.getCategoria_id()));
 		
 		preguntaRepo.save(preguntaNueva);
 		return preguntaNueva;
 		
 	} 
 	
-	public Pregunta update(PreguntaDto dto) {
-		Optional<Pregunta> pregunta = preguntaRepo.findById(dto.getPregunta_id());
+	public Pregunta update(Long preguntaId, PreguntaDto dto) {
+		Optional<Pregunta> pregunta = preguntaRepo.findById(preguntaId);
 		if(pregunta.isPresent()) {
 			Pregunta preguntaActualizacion = pregunta.get();
 			preguntaActualizacion.setEnunciado(dto.getEnunciado().isEmpty() || dto.getEnunciado() == null ? preguntaActualizacion.getEnunciado() : dto.getEnunciado());
