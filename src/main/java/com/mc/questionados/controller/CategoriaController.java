@@ -36,8 +36,7 @@ public class CategoriaController {
 	
 
 	@ApiOperation(value = "Obtener categoria por id")//Swagger
-	@GetMapping
-	@RequestMapping("/{categoriaId}")
+	@GetMapping("/{categoriaId}")
 	public ResponseEntity<?> getById(@PathVariable("categoriaId") Long categoriaId) {
 		
 		if(categoriaService.existById(categoriaId)) {
@@ -69,8 +68,7 @@ public class CategoriaController {
 	
 	
 	@ApiOperation(value = "Eliminar una categoría")//Swagger
-	@DeleteMapping
-	@RequestMapping("/{categoriaId}")
+	@DeleteMapping("/{categoriaId}")
 	public ResponseEntity<String> delete(@PathVariable("categoriaId") Long categoriaId) {
 		if(categoriaService.existById(categoriaId)) {
 			categoriaService.delete(categoriaId);
@@ -81,9 +79,8 @@ public class CategoriaController {
 	
 	
 	@ApiOperation(value = "Actualizar un categoría")//Swagger
-	@PutMapping
-	@RequestMapping("/{categoriaId}")
-	public ResponseEntity<GenericResponse> update(@PathVariable("categoriaId") long categoriaId, @RequestBody CategoriaDto dto) {
+	@PutMapping("/{categoriaId}")
+	public ResponseEntity<GenericResponse> update(@PathVariable("categoriaId") Long categoriaId, @RequestBody CategoriaDto dto) {
 		
 		GenericResponse respuesta = new GenericResponse();
 		

@@ -1,7 +1,7 @@
 package com.mc.questionados.dto;
 
 public class CategoriaDto {
-	private long categoria_id;
+	private Long categoria_id;
 	private String descripcion;
 	private String nombre;
 	
@@ -11,7 +11,7 @@ public class CategoriaDto {
 		return categoria_id;
 	}
 	
-	public void setCategoria_id(long categoria_id) {
+	public void setCategoria_id(Long categoria_id) {
 		this.categoria_id = categoria_id;
 	}
 	

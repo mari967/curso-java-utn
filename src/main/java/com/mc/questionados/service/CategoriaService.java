@@ -15,7 +15,7 @@ public class CategoriaService {
 	@Autowired
 	CategoriaRepo categoriaRepo;
 	
-	public Categoria get(long id) {
+	public Categoria get(Long id) {
 		Optional<Categoria> categoriaResult = categoriaRepo.findById(id);
 		if(categoriaResult.isPresent())
 			return categoriaResult.get();
