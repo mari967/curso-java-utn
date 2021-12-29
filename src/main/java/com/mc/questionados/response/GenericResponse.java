@@ -1,9 +1,18 @@
 package com.mc.questionados.response;
 
 public class GenericResponse {
+	
+	public GenericResponse() {}
+	
+	public GenericResponse(Boolean isOK, String mensaje, Long id) {
+		this.isOK = isOK;
+		this.mensaje = mensaje;
+		this.id = id;
+	}
+	
 	private Boolean isOK;
 	private String mensaje = "";
-	private long id;
+	private Long id;
 	
 	
 	public Boolean getIsOK() {
@@ -21,7 +30,7 @@ public class GenericResponse {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
