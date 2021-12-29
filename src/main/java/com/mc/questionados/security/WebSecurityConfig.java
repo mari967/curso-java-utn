@@ -58,10 +58,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/test/**").permitAll()
-			.anyRequest().authenticated();
+			.authorizeRequests().antMatchers("/api/auth/**",
+							"/api/test/**",
+							//Permitir acceder a la url de swagger
+							"/v2/api-docs",
+		                    "/configuration/ui",
+		                    "/swagger-resources/**",
+		                    "/configuration/security",
+		                    "/swagger-ui/**",
+		                    "/webjars/**",
+                            //Permitir acceder a la url del endpoint de salud
+                            "/actuator/**").permitAll()
+			.antMatchers("/**").authenticated();
+		
 
-		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+		//http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }

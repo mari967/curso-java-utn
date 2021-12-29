@@ -32,10 +32,14 @@ import com.mc.questionados.response.JwtResponse;
 import com.mc.questionados.security.jwt.JwtUtils;
 import com.mc.questionados.security.services.UserDetailsImpl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@Api(tags = "Autenticación")  //Swagger
 public class AuthenticationController {
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -53,6 +57,7 @@ public class AuthenticationController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
+	@ApiOperation(value = "Iniciar sesión en la API")//Swagger
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -74,6 +79,7 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/signup")
+	@ApiOperation(value = "Registrarse como usuario de la API")//Swagger
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity

@@ -36,7 +36,7 @@ public class SwaggerConfig {
     }
  
 	private ApiInfo getApiInfo() {
-		return new ApiInfo("Questionados API", "Descripción Questionados API", "1.0", "http://codmind.com/terms",
+		return new ApiInfo("Questionados API", "La mejor API de preguntas", "1.0", "http://codmind.com/terms",
 				new Contact("NTTDATA", "https://nttdata.com", "apis@nttdata.com"), "LICENSE", "LICENSE URL",
 				Collections.emptyList()
 
